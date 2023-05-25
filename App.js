@@ -1,20 +1,58 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import HomeScreen from "./screens/HomeScreen.js";
+import { AppProvider } from "./context.js";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import QrScanOutput from "./screens/QrScanOutput.js";
+import HistoryScreen from "./screens/HistoryScreen.js";
+import HistoryScreenOnSelectItem from "./screens/HistoryScreenOnSelectItem";
+import HistoryItemDetail from "./screens/HistoryItemDetails.js";
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <AppProvider>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen
+            name="HomeScreen"
+            component={HomeScreen}
+            options={{
+              animation: "fade",
+            }}
+          />
+          <Stack.Screen
+            name="OutputScreen"
+            component={QrScanOutput}
+            options={{
+              animation: "slide_from_right",
+            }}
+          />
+          <Stack.Screen
+            name="HistoryScreen"
+            component={HistoryScreen}
+            options={{
+              animation: "slide_from_bottom",
+            }}
+          />
+          <Stack.Screen
+            name="HistoryScreenOnSelect"
+            component={HistoryScreenOnSelectItem}
+            options={{
+              animation: "none",
+            }}
+          />
+          <Stack.Screen
+            name="HistoryItemDetail"
+            component={HistoryItemDetail}
+            options={{
+              animation: "slide_from_right",
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AppProvider>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;

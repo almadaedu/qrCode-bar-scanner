@@ -3,24 +3,15 @@ import { Alert,ToastAndroid } from 'react-native'
 
 const AppContext = React.createContext()
 
-
-// sets a global context to out application
 export const AppProvider = ({children})=> {
 
-
-    // state variable to handle flashlight 
     const [isFlashLightOn,setIsFlashLightOn] = useState(false)
 
-
-    // history list state variable
     const [historyList,setHistoryList] = useState([])
 
 
-    // scanned state variable to check if camera has scanned a code or not
     const [scanned, setScanned] = useState(false);
 
-
-    // delete a particular item
     const deleteItem = (id)=> {
         setHistoryList(historyList.filter((item)=> item.id !== id))
     }
@@ -28,20 +19,20 @@ export const AppProvider = ({children})=> {
     // show toast msg and clear the history list state variable
     const showToastAndClearHistory = ()=> {
         setHistoryList([])
-        ToastAndroid.show('Cleared History', ToastAndroid.SHORT)
+        ToastAndroid.show('Histórico limpo', ToastAndroid.SHORT)
     }
     
 
     // ask user to confirm clear history list
     const clearHistoryList = ()=> {
-        Alert.alert('Clear history?', 'All scan history would be cleared',
+        Alert.alert('Limpar histórico?', 'Todos os escaneamentos serão excluídos',
             [
                 {
-                    text:'No',
+                    text:'Não',
                     style:'cancel'
                 },
                 {
-                    text:'Yes',
+                    text:'Sim',
                     onPress:()=>showToastAndClearHistory()
                 }
             ],
@@ -52,15 +43,12 @@ export const AppProvider = ({children})=> {
     }
 
 
-    // toggle flashlight
     const toggleFlashLight = ()=> {
         setIsFlashLightOn(!isFlashLightOn)
     }
 
 
     return (
-
-        // context provider for global usage 
         <AppContext.Provider
             value={{
                 isFlashLightOn,
@@ -73,7 +61,6 @@ export const AppProvider = ({children})=> {
                 deleteItem,
             }}
         >
-            {/* to render all other chil components */}
             {children} 
         </AppContext.Provider>
     )
@@ -81,7 +68,6 @@ export const AppProvider = ({children})=> {
 
 
 
-// custom hook for global context
 export const useGlobalContext = ()=> {
     return useContext(AppContext)
 }
