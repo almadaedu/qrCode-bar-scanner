@@ -4,16 +4,6 @@
 
 Após ter instalado os pré-requisitos, basta seguir o seguintes passos:
 
-Crie uma pasta em um local de escolha, e abra o CLI que desejar.
-
-Em seguida, rode o comando: 
-
-```
-git clone https://github.com/almadaedu/mobileDev-project.git
-```
-
-Ainda dentro de sua CLI execute os comandos:
-
 ```
 yarn install
 ```
